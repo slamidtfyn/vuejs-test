@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vue.js test</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    <link href="site.css" rel="stylesheet">
     <style>
         .row0,
         .col0 {
@@ -16,9 +20,61 @@
 </head>
 
 <body>
-    <div id="app">
-        {{ message }}
-    </div>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">Demo page</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#app">Hello</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#example-1" tabindex="-1" aria-disabled="true">Users</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+
+    <main role="main" class="container">
+	<div>Title!</div>
+        <div id="app" class="tabber">
+            {{ message }}
+        </div>
+
+        <div id="example-1" class="tabber">
+            <div v-for="(item,name, index) in items">
+                <p>{{ name }}</p>
+                <table border=1>
+
+                    <tr v-for="(item2,index2) in item" :class="'row' + index2">
+
+
+                        <td v-for="(item3,index3) in item2" :class="'col' + index3">
+                            <template v-if="index3===0 && index2!==0">{{ moment(item3) }}</template>
+                            <template v-else>{{item3}}</template>
+
+                        </td>
+
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
@@ -32,25 +88,7 @@
 
 
 
-    <div id="example-1">
-        <div v-for="(item,name, index) in items">
-            <p>{{ name }}</p>
-            <table border=1>
 
-                <tr v-for="(item2,index2) in item" :class="'row' + index2">
-
-
-                    <td v-for="(item3,index3) in item2" :class="'col' + index3">
-                        <template v-if="index3===0">{{ moment(item3) }}</template>
-                        <template v-else>{{item3}}</template>
-
-                    </td>
-
-                </tr>
-
-            </table>
-        </div>
-    </div>
 
     <script>
         var example1 = new Vue({
