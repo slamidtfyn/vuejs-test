@@ -5,6 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vue.js test</title>
+    <style>
+        .row0,
+        .col0 {
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"
+        integrity="sha256-5oApc/wMda1ntIEK4qoWJ4YItnV4fBHMwywunj8gPqc=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -29,10 +37,14 @@
             <p>{{ name }}</p>
             <table border=1>
 
-                <tr v-for="(item2,index2) in item">
-                    
+                <tr v-for="(item2,index2) in item" :class="'row' + index2">
 
-                    <td v-for="(item3,index3) in item2">{{item3}}</td>
+
+                    <td v-for="(item3,index3) in item2" :class="'col' + index3">
+                        <template v-if="index3===0">{{ moment(item3) }}</template>
+                        <template v-else>{{item3}}</template>
+
+                    </td>
 
                 </tr>
 
@@ -43,6 +55,11 @@
     <script>
         var example1 = new Vue({
             el: '#example-1',
+            methods: {
+                moment: function (x) {
+                    return moment(x).format("DD-MM-YYYY");
+                }
+            },
             data: {
                 items: {
                     "103": [
@@ -1814,6 +1831,7 @@
                     ]
                 }
             }
+
         })
     </script>
 </body>
